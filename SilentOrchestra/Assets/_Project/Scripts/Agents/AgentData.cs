@@ -13,9 +13,10 @@ namespace SilentOrchestra.Agents
         public float mobility;
         public float perception;
         public float execution;
+        public float fortitude;
 
         public static AgentStats Default =>
-            new AgentStats {charisma = 10f, intuition = 10f, mobility = 10f, perception = 10f, execution = 10f};
+            new AgentStats {charisma = 10f, intuition = 10f, mobility = 10f, perception = 10f, execution = 10f, fortitude = 10f};
     }
 
     [Serializable]
@@ -25,6 +26,20 @@ namespace SilentOrchestra.Agents
         public string agentID;
         public PersonaInfo undercoverPersona;
         public PersonaInfo realPersona;
+    }
+
+    public enum AgentRole
+    {
+        Assassin,
+        Saboteur,
+        Smuggler,
+        Provocateur,
+        Intelligence,
+        Principal,
+        Sleeper,
+        DoubleAgent,
+        TripleAgent,
+        QuadrupleAgent
     }
 
     /// <summary>
