@@ -1,0 +1,17 @@
+{
+    "name": "SilentOrchestra.Agencies",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8eac1c8934c013c42805505f45b050bd",
+        "GUID:2f163c50d8786ac45bcfd700494788d3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

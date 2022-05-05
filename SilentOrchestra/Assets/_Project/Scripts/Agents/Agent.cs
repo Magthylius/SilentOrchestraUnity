@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace SilentOrchestra.Agents
 {
-    public abstract class AgentBase : MonoBehaviour
+    public abstract class Agent : MonoBehaviour
     {
-        public AgentInfo Info;
-        public AgentStats Stats;
+        public AgentInfo info;
+        public AgentStats stats;
 
         public abstract void Tick();
     }

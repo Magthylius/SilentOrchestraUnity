@@ -5,35 +5,38 @@ using UnityEngine;
 
 namespace SilentOrchestra.Agents
 {
+    [Serializable]
     public struct AgentStats
     {
-        public float Charisma;
-        public float Intuition;
-        public float Mobility;
-        public float Perception;
-        public float Execution;
+        public float charisma;
+        public float intuition;
+        public float mobility;
+        public float perception;
+        public float execution;
 
         public static AgentStats Default =>
-            new AgentStats {Charisma = 10f, Intuition = 10f, Mobility = 10f, Perception = 10f, Execution = 10f};
+            new AgentStats {charisma = 10f, intuition = 10f, mobility = 10f, perception = 10f, execution = 10f};
     }
 
+    [Serializable]
     public struct AgentInfo
     {
-        public string Codename;
-        public string AgentID;
-        public PersonaInfo UndercoverPersona;
-        public PersonaInfo RealPersona;
+        public string codename;
+        public string agentID;
+        public PersonaInfo undercoverPersona;
+        public PersonaInfo realPersona;
     }
 
     /// <summary>
-    /// Used for information of a certain persona, whether real or fake
+    /// Used for information of a certain persona, whether real or fake.
     /// </summary>
+    [Serializable]
     public struct PersonaInfo
     {
-        public string Name;
-        public string Gender;
+        public string name;
+        public string gender;
+        public string occupation;
         public DateTime DateOfBirth;
-        public string Occupation;
 
         public int GetAge(DateTime currentDate)
         {

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using SilentOrchestra.Agencies;
 using SilentOrchestra.Operations;
 using UnityEngine;
 
 namespace SilentOrchestra.Theaters
 {
-    public class TheaterBase : MonoBehaviour
+    public class Theater : MonoBehaviour
     {
-        private List<OperationBase> _operations;
+        private List<Agency> _agencies = new List<Agency>();
         
     }
 }
