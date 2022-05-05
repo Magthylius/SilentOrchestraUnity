@@ -1,0 +1,3 @@
+[submodule "SilentOrchestra/Assets/_Project/Scripts/Externals"]
+	path = SilentOrchestra/Assets/_Project/Scripts/Externals
+	url = https://github.com/Magthylius/UnityLibraries
