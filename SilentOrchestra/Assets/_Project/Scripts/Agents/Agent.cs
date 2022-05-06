@@ -13,6 +13,19 @@ namespace SilentOrchestra.Agents
         public Action<Agent, float> OperationContributed;
 
         public void Tick() { }
+
+        public static Agent RandomAgent
+        {
+            get
+            {
+                Agent randomAgent = new Agent();
+                AgentInfo info = new AgentInfo();
+                AgentStats stats = AgentStats.Default;
+
+                PersonaInfo realPersona = new PersonaInfo();
+                return randomAgent;
+            }
+        }
     }
     
 }

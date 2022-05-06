@@ -19,7 +19,7 @@ namespace SilentOrchestra.Core
 
         public void CreateNewTheater()
         {
-            _currentTheater = new Theater(GlobalSettings.GovernmentsPerTheater);
+            _currentTheater = new Theater(GameSettings.GovernmentsPerTheater);
         }
     }
 }

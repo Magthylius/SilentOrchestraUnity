@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SilentOrchestra.Shell;
 using UnityEngine;
 
 namespace SilentOrchestra.Agents
@@ -56,6 +57,16 @@ namespace SilentOrchestra.Agents
         public int GetAge(DateTime currentDate)
         {
             return currentDate.Year - DateOfBirth.Year;
+        }
+
+        public PersonaInfo Randomized
+        {
+            get
+            {
+                PersonaInfo info = new PersonaInfo();
+                info.name = DatabaseFactory.RandomName;
+                return info;
+            }
         }
     }
 }

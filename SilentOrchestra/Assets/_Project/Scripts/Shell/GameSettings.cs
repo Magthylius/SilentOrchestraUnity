@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SilentOrchestra.Shell
 {
-    public static class GlobalSettings
+    public static class GameSettings
     {
         private static int _agentsPerAgency;
         public static int AgentsPerAgency
@@ -27,11 +27,20 @@ namespace SilentOrchestra.Shell
             set => _governmentsPerTheater = value;
         }
 
+        private static Vector2 _agentAgeRange;
+        public static Vector2 AgentAgeRange
+        {
+            get => _agentAgeRange;
+            set => AgentAgeRange = value;
+        }
+
         public static void ResetToDefaultSettings()
         {
             AgentsPerAgency = 10;
             AgenciesPerGovernment = 1;
             GovernmentsPerTheater = 4;
+
+            AgentAgeRange = new Vector2(16, 75);
         }
     }
 }

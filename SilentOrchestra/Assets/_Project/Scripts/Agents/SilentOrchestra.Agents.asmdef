@@ -1,3 +1,4 @@
 {
-	"name": "SilentOrchestra.Agents"
+	"name": "SilentOrchestra.Agents",
+	"references":[ "GUID:7ea3b408d7aade14b9aadab9c1a4c770" ]
 }

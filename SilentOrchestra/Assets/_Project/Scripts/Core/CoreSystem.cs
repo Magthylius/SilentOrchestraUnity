@@ -15,7 +15,7 @@ namespace SilentOrchestra.Core
         
         void Start()
         {
-            GlobalSettings.ResetToDefaultSettings();
+            GameSettings.ResetToDefaultSettings();
             timeController.Initialize(this, DateTime.Now);
             theaterController.Initialize(this);
         }

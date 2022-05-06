@@ -20,7 +20,7 @@ namespace SilentOrchestra.Theaters
             _agencies = new List<Agency>();
             for (int i = 0; i < amount; i++)
             {
-                Agency agency = new Agency(GlobalSettings.AgentsPerAgency);
+                Agency agency = new Agency(GameSettings.AgentsPerAgency);
                 _agencies.Add(agency);
             }
         }

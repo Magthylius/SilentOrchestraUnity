@@ -21,7 +21,7 @@ namespace SilentOrchestra.Theaters
             _governments = new List<Government>();
             for (int i = 0; i < amount; i++)
             {
-                Government gov = new Government(GlobalSettings.AgenciesPerGovernment);
+                Government gov = new Government(GameSettings.AgenciesPerGovernment);
                 _governments.Add(gov);
             }
         }
