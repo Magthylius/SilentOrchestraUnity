@@ -1,9 +1,11 @@
 {
-    "name": "SilentOrchestra.Theaters",
+    "name": "SilentOrchestra.Core",
     "rootNamespace": "",
     "references": [
+        "GUID:8eac1c8934c013c42805505f45b050bd",
         "GUID:6a0553d75ba1a0b40ab4fd9e95bf7f53",
         "GUID:2f163c50d8786ac45bcfd700494788d3",
+        "GUID:b217d1f7a854d0143b06faeb70ee0265",
         "GUID:7ea3b408d7aade14b9aadab9c1a4c770"
     ],
     "includePlatforms": [],

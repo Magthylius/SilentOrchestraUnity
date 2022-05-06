@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace SilentOrchestra.Operations
 {
-    public abstract class Operation : MonoBehaviour
+    public class Operation 
     {
-        public OperationInfo info;
-        public OperationStatus status;
+        public OperationInfo Info;
+        public OperationStatus Status;
         
         private Dictionary<string, Agent> _agents = new Dictionary<string, Agent>();
         private float _progress = 0f;
@@ -27,8 +27,8 @@ namespace SilentOrchestra.Operations
         /// <returns>True if successful addition, false if not (or already exist).</returns>
         public bool TryAddAgent(Agent agent)
         {
-            if (_agents.ContainsKey(agent.info.agentID)) return false;
-            _agents.Add(agent.info.agentID, agent);
+            if (_agents.ContainsKey(agent.Info.agentID)) return false;
+            _agents.Add(agent.Info.agentID, agent);
             agent.OperationContributed += OnOperationContributed;
             return true;
         }
@@ -38,8 +38,8 @@ namespace SilentOrchestra.Operations
         /// <returns>True if successful removal, false if not (or does not exist).</returns>
         public bool TryRemoveAgent(Agent agent)
         {
-            if (!_agents.ContainsKey(agent.info.agentID)) return false;
-            _agents.Remove(agent.info.agentID);
+            if (!_agents.ContainsKey(agent.Info.agentID)) return false;
+            _agents.Remove(agent.Info.agentID);
             agent.OperationContributed -= OnOperationContributed;
             return true;
         }

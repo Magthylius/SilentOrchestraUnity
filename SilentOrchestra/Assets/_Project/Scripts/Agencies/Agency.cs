@@ -6,9 +6,24 @@ using UnityEngine;
 
 namespace SilentOrchestra.Agencies
 {
-    public class Agency : MonoBehaviour
+    public class Agency 
     {
-        private List<Agent> _agent = new List<Agent>();
+        private List<Agent> _agents = new List<Agent>();
         private List<Operation> _operations = new List<Operation>();
+
+        public Agency(int agentAmount)
+        {
+            RegenerateAgents(agentAmount);
+        }
+
+        public void RegenerateAgents(int amount)
+        {
+            _agents = new List<Agent>();
+            for (int i = 0; i < amount; i++)
+            {
+                Agent agent = new Agent();
+                _agents.Add(agent);
+            }
+        }
     }
 }
