@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using SilentOrchestra.Agents;
-using SilentOrchestra.Operations;
 using UnityEngine;
 
-namespace SilentOrchestra.Agencies
+namespace SilentOrchestra.Theaters
 {
     public class Agency 
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using SilentOrchestra.Shell;
 using UnityEngine;
 
-namespace SilentOrchestra.Agents
+namespace SilentOrchestra.Theaters
 {
     public class Agent 
     {
