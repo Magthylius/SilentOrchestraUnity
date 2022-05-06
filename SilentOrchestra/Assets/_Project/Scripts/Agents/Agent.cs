@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SilentOrchestra.Shell;
 using UnityEngine;
 
 namespace SilentOrchestra.Agents
@@ -22,7 +23,10 @@ namespace SilentOrchestra.Agents
                 AgentInfo info = new AgentInfo();
                 AgentStats stats = AgentStats.Default;
 
-                PersonaInfo realPersona = new PersonaInfo();
+                info.codename = DatabaseFactory.RandomCodename;
+                //info.agentID = 
+                info.realPersona = PersonaInfo.Randomized;
+                info.undercoverPersona = PersonaInfo.Randomized;
                 return randomAgent;
             }
         }

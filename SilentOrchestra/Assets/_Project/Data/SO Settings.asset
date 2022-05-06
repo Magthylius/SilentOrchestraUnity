@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d49f8f6feba536d4fac3b71e6bed3f39, type: 3}
-  m_Name: SO SettingsDatabase
+  m_Name: SO Settings
   m_EditorClassIdentifier: 
   agentAgeCurve:
     serializedVersion: 2

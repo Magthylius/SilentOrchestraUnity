@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SilentOrchestra.Shell;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SilentOrchestra.Agents
 {
@@ -15,6 +16,7 @@ namespace SilentOrchestra.Agents
         public float perception;
         public float execution;
         public float fortitude;
+        public float discretion;
 
         public static AgentStats Default =>
             new AgentStats {charisma = 10f, intuition = 10f, mobility = 10f, perception = 10f, execution = 10f, fortitude = 10f};
@@ -29,20 +31,6 @@ namespace SilentOrchestra.Agents
         public PersonaInfo realPersona;
     }
 
-    public enum AgentRole
-    {
-        Assassin,
-        Saboteur,
-        Smuggler,
-        Provocateur,
-        Intelligence,
-        Principal,
-        Sleeper,
-        DoubleAgent,
-        TripleAgent,
-        QuadrupleAgent
-    }
-
     /// <summary>
     /// Used for information of a certain persona, whether real or fake.
     /// </summary>
@@ -54,19 +42,43 @@ namespace SilentOrchestra.Agents
         public string occupation;
         public DateTime DateOfBirth;
 
-        public int GetAge(DateTime currentDate)
-        {
-            return currentDate.Year - DateOfBirth.Year;
-        }
+        public int Age =>
+            Mathf.RoundToInt((float)(GameRuntimeData.CurrentDateTime - DateOfBirth).TotalDays / GameSettings.kTotalDaysPerYear);
 
-        public PersonaInfo Randomized
+        public static PersonaInfo Randomized
         {
             get
             {
                 PersonaInfo info = new PersonaInfo();
                 info.name = DatabaseFactory.RandomName;
+                info.gender = Random.Range(0, 2) == 0 ? "Male" : "Female";
+                info.occupation = DatabaseFactory.RandomOccupation;
+
+                float randomAgeInDays = DatabaseFactory.RandomAge * GameSettings.kTotalDaysPerYear;
+                info.DateOfBirth = GameRuntimeData.CurrentDateTime - TimeSpan.FromDays(randomAgeInDays);
                 return info;
             }
+        }
+        
+        public enum AgentRoles
+        {
+            Assassin,
+            Saboteur,
+            Smuggler,
+            Provocateur,
+            Intelligence,
+            Principal,
+            Sleeper,
+            DoubleAgent,
+            TripleAgent,
+            QuadrupleAgent
+        }
+
+        public enum AgentGenders
+        {
+            Male,
+            Female,
+            NonBinary
         }
     }
 }

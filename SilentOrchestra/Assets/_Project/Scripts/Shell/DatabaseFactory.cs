@@ -9,26 +9,20 @@ namespace SilentOrchestra.Shell
 {
     public class DatabaseFactory : SoftSingleton<DatabaseFactory>
     {
-        [SerializeField] private NameDatabase nameDatabase;
+        [SerializeField] private NameDatabase names;
+        [SerializeField] private OccupationDatabase occupations;
+        [SerializeField] private SettingsDatabase settings;
 
-        public static string RandomName
-        {
-            get
-            {
-                string firstName = RandomEx.Element(Instance.nameDatabase.firstNames);
-                string lastName = RandomEx.Element(Instance.nameDatabase.lastNames);
-                return $"{firstName} {lastName}";
-            }
-        }
+        public static string RandomCodename => 
+            RandomEx.Element(Instance.names.codenames);
+        
+        public static string RandomName =>
+            $"{RandomEx.Element(Instance.names.firstNames)} {RandomEx.Element(Instance.names.lastNames)}";
 
-        public static DateTime RandomAge
-        {
-            get
-            {
-                Vector2 ageRange = GameSettings.AgentAgeRange;
-                float randomYearsOld = RandomEx.Range(ageRange);
-                return DateTime.Today;
-            }
-        }
+        public static string RandomOccupation =>
+            RandomEx.Element(Instance.occupations.occupations);
+
+        public static float RandomAge =>
+            Instance.settings.GetAge(Random.Range(0f, 1f));
     }
 }
