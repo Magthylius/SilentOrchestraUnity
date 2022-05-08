@@ -19,6 +19,8 @@ namespace SilentOrchestra.Shell
         public static string RandomName =>
             $"{RandomEx.Element(Instance.names.firstNames)} {RandomEx.Element(Instance.names.lastNames)}";
 
+        public static string RandomID => Random.Range(1, 10000).ToString();
+        
         public static string RandomOccupation =>
             RandomEx.Element(Instance.occupations.occupations);
 

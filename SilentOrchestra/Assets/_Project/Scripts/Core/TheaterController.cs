@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using SilentOrchestra.Shell;
@@ -11,7 +12,12 @@ namespace SilentOrchestra.Core
         #region Private Fields
         private Theater _currentTheater;
         #endregion
-        
+
+        private void Start()
+        {
+            CreateNewTheater();
+        }
+
         public override void Initialize(CoreSystem coreSystem)
         {
             base.Initialize(coreSystem);

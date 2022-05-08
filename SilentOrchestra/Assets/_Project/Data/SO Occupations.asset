@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02ddaa1e5b57746bf789b8de9a318f, type: 3}
   m_Name: SO Occupations
   m_EditorClassIdentifier: 
-  occupations: []
+  occupations:
+  - Teacher

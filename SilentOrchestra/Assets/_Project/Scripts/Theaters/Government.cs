@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace SilentOrchestra.Theaters
 {
+    [System.Serializable]
     public class Government 
     {
         private List<Agency> _agencies = new List<Agency>();

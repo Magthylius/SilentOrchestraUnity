@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace SilentOrchestra.Theaters
 {
+    [System.Serializable]
     public class Agency 
     {
         private List<Agent> _agents = new List<Agent>();
@@ -19,7 +20,7 @@ namespace SilentOrchestra.Theaters
             _agents = new List<Agent>();
             for (int i = 0; i < amount; i++)
             {
-                Agent agent = new Agent();
+                Agent agent = Agent.RandomAgent;
                 _agents.Add(agent);
             }
         }

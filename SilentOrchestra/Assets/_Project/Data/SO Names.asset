@@ -12,5 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e7e328fdce5854aaf7cdec175843c9, type: 3}
   m_Name: SO Names
   m_EditorClassIdentifier: 
-  FirstNames: []
-  LastNames: []
+  codenames:
+  - Asotiga
+  - Blue
+  - Tiffent
+  firstNames:
+  - Aaron
+  - Daniel
+  - Chris
+  lastNames:
+  - Balls
+  - Dick
+  - Bruh
