@@ -1,6 +1,6 @@
 {
     "name": "SilentOrchestra.Shell.Editors",
-    "rootNamespace": "",
+    "rootNamespace": "SilentOrchestra.Shell.Editors",
     "references": [
         "GUID:7ea3b408d7aade14b9aadab9c1a4c770",
         "GUID:6967aba9fc1d24e4c999a95627d19316"

@@ -1,10 +1,7 @@
 {
-    "name": "SilentOrchestra.Core",
-    "rootNamespace": "SilentOrchestra.Core",
-    "references": [
-        "GUID:b217d1f7a854d0143b06faeb70ee0265",
-        "GUID:7ea3b408d7aade14b9aadab9c1a4c770"
-    ],
+    "name": "SilentOrchestra.UI",
+    "rootNamespace": "SilentOrchestra.UI",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
