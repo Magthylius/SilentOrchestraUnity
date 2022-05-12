@@ -8,18 +8,16 @@ namespace SilentOrchestra.UI
     [RequireComponent(typeof(Canvas))]
     public class PanelController : MonoBehaviour
     {
-        [SerializeField] private PanelWindow[] panels;
+        [SerializeField] private PanelWindow[] windows;
 
-        private void Start()
-        {
-            Initialize();
-        }
+        protected MenuController Menu;
 
-        public void Initialize()
+        public void Initialize(MenuController menu)
         {
-            foreach (PanelWindow panel in panels)
+            Menu = menu;
+            foreach (PanelWindow window in windows)
             {
-                panel.Initialize(this);
+                window.Initialize(this);
             }
         }
     }
