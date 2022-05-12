@@ -9,6 +9,10 @@ namespace SilentOrchestra.Core
 {
     public class TheaterController : SystemController
     {
+        #region Public Fields
+        public Action<Theater> OnTheaterCreated;
+        #endregion
+        
         #region Private Fields
         private Theater _currentTheater;
         #endregion
@@ -26,6 +30,7 @@ namespace SilentOrchestra.Core
         public void CreateNewTheater()
         {
             _currentTheater = new Theater(GameSettings.GovernmentsPerTheater);
+            OnTheaterCreated?.Invoke(_currentTheater);
         }
     }
 }

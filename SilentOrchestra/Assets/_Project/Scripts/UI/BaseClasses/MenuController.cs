@@ -15,12 +15,12 @@ namespace SilentOrchestra.UI
         [SerializeField] private bool initializeOnStart = true;
         #endregion
 
-        private void Start()
+        protected virtual void Start()
         {
             if (initializeOnStart) Initialize();
         }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             foreach (PanelController panel in panels)
             {

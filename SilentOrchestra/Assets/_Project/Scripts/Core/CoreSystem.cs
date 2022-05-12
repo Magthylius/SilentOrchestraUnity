@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Magthylius;
 using SilentOrchestra.Shell;
 using UnityEngine;
 
 namespace SilentOrchestra.Core
 {
-    public class CoreSystem : MonoBehaviour
+    public class CoreSystem : SoftSingleton<CoreSystem>
     {
         #region Serialized Fields
         [SerializeField] private TimeController timeController;
@@ -20,10 +21,7 @@ namespace SilentOrchestra.Core
             theaterController.Initialize(this);
         }
 
-        void Update()
-        {
-        
-        }
+        public TheaterController Theater => theaterController;
     }
 
 }

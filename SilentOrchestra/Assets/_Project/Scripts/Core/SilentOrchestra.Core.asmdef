@@ -3,7 +3,8 @@
     "rootNamespace": "SilentOrchestra.Core",
     "references": [
         "GUID:b217d1f7a854d0143b06faeb70ee0265",
-        "GUID:7ea3b408d7aade14b9aadab9c1a4c770"
+        "GUID:7ea3b408d7aade14b9aadab9c1a4c770",
+        "GUID:6967aba9fc1d24e4c999a95627d19316"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

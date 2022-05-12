@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using SilentOrchestra.Core;
 using UnityEngine;
 
 namespace SilentOrchestra.UI
 {
     public class DebugMenu : MenuController
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        private CoreSystem _core;
+        private TheaterController _theaterController;
 
-        // Update is called once per frame
-        void Update()
+        public override void Initialize()
         {
-        
+            base.Initialize();
+            _core = CoreSystem.Instance;
+            _theaterController = _core.Theater;
         }
     }
 }
