@@ -1,14 +1,14 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using SilentOrchestra.Shell;
-using UnityEngine;
 
 namespace SilentOrchestra.Orchestra
 {
     [System.Serializable]
     public class Government 
     {
-        private List<Agency> _agencies = new List<Agency>();
+        public List<Agency> Agencies { get; private set; } = new List<Agency>();
 
         public Government(int agencyAmount)
         {
@@ -17,12 +17,15 @@ namespace SilentOrchestra.Orchestra
         
         public void GenerateAgencies(int amount)
         {
-            _agencies = new List<Agency>();
+            Agencies = new List<Agency>();
             for (int i = 0; i < amount; i++)
             {
                 Agency agency = new Agency(GameSettings.AgentsPerAgency);
-                _agencies.Add(agency);
+                Agencies.Add(agency);
             }
         }
+
+        public bool HasAgency(Agency agency) => Agencies.Contains(agency);
+        public bool HasAgency(string agencyName) => Agencies.Contains(Agencies.FirstOrDefault(agency => agency.Name == agencyName));
     }
 }

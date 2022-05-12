@@ -8,7 +8,7 @@ namespace SilentOrchestra.Orchestra
     [System.Serializable]
     public class Theater 
     {
-        private List<Government> _governments = new List<Government>();
+        public List<Government> Governments { get; private set; }= new List<Government>();
 
         public Theater(int governmentAmount)
         {
@@ -17,11 +17,11 @@ namespace SilentOrchestra.Orchestra
 
         public void GenerateGovernments(int amount)
         {
-            _governments = new List<Government>();
+            Governments = new List<Government>();
             for (int i = 0; i < amount; i++)
             {
                 Government gov = new Government(GameSettings.AgenciesPerGovernment);
-                _governments.Add(gov);
+                Governments.Add(gov);
             }
         }
     }

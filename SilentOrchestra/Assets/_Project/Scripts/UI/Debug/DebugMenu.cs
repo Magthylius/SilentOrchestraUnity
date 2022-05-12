@@ -7,13 +7,12 @@ namespace SilentOrchestra.UI
 {
     public class DebugMenu : MenuController
     {
-        private CoreSystem _core;
+        private readonly CoreSystem _core = CoreSystem.Instance;
         private TheaterController _theaterController;
 
         public override void Initialize()
         {
             base.Initialize();
-            _core = CoreSystem.Instance;
             _theaterController = _core.Theater;
         }
     }

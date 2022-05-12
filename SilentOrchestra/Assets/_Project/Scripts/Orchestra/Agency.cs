@@ -7,8 +7,11 @@ namespace SilentOrchestra.Orchestra
     [System.Serializable]
     public class Agency 
     {
-        private List<Agent> _agents = new List<Agent>();
-        private List<Operation> _operations = new List<Operation>();
+        public List<Agent> Agents { get; private set; } = new List<Agent>();
+        public List<Operation> Operations { get; private set; } = new List<Operation>();
+
+        private string _name;
+        private Government _belongingGovernment;
 
         public Agency(int agentAmount)
         {
@@ -17,12 +20,15 @@ namespace SilentOrchestra.Orchestra
 
         public void RegenerateAgents(int amount)
         {
-            _agents = new List<Agent>();
+            Agents = new List<Agent>();
             for (int i = 0; i < amount; i++)
             {
                 Agent agent = Agent.RandomAgent;
-                _agents.Add(agent);
+                Agents.Add(agent);
             }
         }
+
+        public string Name => _name;
+        public Government Government => _belongingGovernment;
     }
 }
