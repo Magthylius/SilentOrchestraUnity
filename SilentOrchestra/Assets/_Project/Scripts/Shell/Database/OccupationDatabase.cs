@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Magthylius;
 using UnityEngine;
 
 namespace SilentOrchestra.Shell
@@ -8,5 +9,7 @@ namespace SilentOrchestra.Shell
     public class OccupationDatabase : ScriptableObject
     {
         public string[] occupations;
+
+        public string RandomOccupation => RandomEx.Element(occupations);
     }
 }

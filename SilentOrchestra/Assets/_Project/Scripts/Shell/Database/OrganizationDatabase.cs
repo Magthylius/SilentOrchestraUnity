@@ -48,5 +48,79 @@ namespace SilentOrchestra.Shell
                 return name;
             }
         }
+        
+        public string GenerateAbbreviation(string fullName)
+        {
+            fullName = fullName.Trim();
+            string[] split = fullName.Split(' ', ',');
+
+            return GenerateAbbreviationInitials(split);
+            
+            //! TODO: Make generation algorithms better
+            AbbreviationGenerationMethod method = (AbbreviationGenerationMethod)Random.Range(0, 3);
+
+            switch (method)
+            {
+                case AbbreviationGenerationMethod.Initials: return GenerateAbbreviationInitials(split);
+                case AbbreviationGenerationMethod.Doubles: return GenerateAbbreviationDoubles(split);
+                case AbbreviationGenerationMethod.Groups: return GenerateAbbreviationGroups(split);
+                default: return "UWU";
+            }
+        }
+
+        public string GenerateAbbreviationInitials(string[] splitName)
+        {
+            string abbrev = string.Empty;
+            foreach (string s in splitName)
+            {
+                if (string.IsNullOrWhiteSpace(s)) continue;
+                if (char.IsUpper(s[0])) abbrev += s[0];
+            }
+
+            return abbrev;
+        }
+        
+        public string GenerateAbbreviationDoubles(string[] splitName)
+        {
+            string abbrev = string.Empty;
+            foreach (string s in splitName)
+            {
+                if (string.IsNullOrWhiteSpace(s) || !char.IsUpper(s[0])) continue;
+                abbrev += s.Substring(0, 2);
+            }
+
+            return abbrev;
+        }
+        
+        public string GenerateAbbreviationGroups(string[] splitName)
+        {
+            string abbrev = string.Empty;
+            foreach (string s in splitName)
+            {
+                if (string.IsNullOrWhiteSpace(s) || !char.IsUpper(s[0])) continue;
+                string word = s;
+                string group = string.Empty;
+                char curChar = word[0];
+                
+                while (group.Length < 3 || curChar.IsAnyOf('a', 'e', 'i', 'o', 'u'))
+                {
+                    group += curChar;
+                    word = word.Remove(0, 1);
+                    if (word.Length <= 0) break;
+                    else curChar = word[0];
+                }
+
+                abbrev += group;
+            }
+
+            return abbrev;
+        }
+
+        public enum AbbreviationGenerationMethod
+        {
+            Initials = 0,
+            Doubles = 1,
+            Groups = 2
+        }
     }
 }

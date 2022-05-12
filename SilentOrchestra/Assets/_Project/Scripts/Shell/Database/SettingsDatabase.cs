@@ -27,5 +27,7 @@ namespace SilentOrchestra.Shell
 
         public float GetAge(float normalizedValue) =>
             MathEx.Lerp(agentAgeRange, agentAgeCurve.Evaluate(normalizedValue));
+
+        public float RandomAge => GetAge(Random.value);
     }
 }

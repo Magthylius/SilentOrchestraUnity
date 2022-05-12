@@ -11,18 +11,26 @@ namespace SilentOrchestra.Shell.Editors
     {
         private OrganizationDatabase _database;
 
-        private string _testGen = string.Empty;
+        private string _generatedName = string.Empty;
+        private string _generatedAbbrev = string.Empty;
         private void OnEnable()
         {
             _database = (OrganizationDatabase)target;
+            _generatedName = _database.RandomAgencyName;
+            _generatedAbbrev = _database.GenerateAbbreviation(_generatedName);
         }
         
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
             
-            EditorGUILayout.LabelField($"Test Gen: {_testGen}");
-            if (GUILayout.Button("Generate random name")) _testGen = _database.RandomAgencyName;
+            EditorGUILayout.LabelField($"Generated Name: {_generatedName}");
+            EditorGUILayout.LabelField($"Generated Abbrev: {_generatedAbbrev}");
+            if (GUILayout.Button("Generate random name"))
+            {
+                _generatedName = _database.RandomAgencyName;
+                _generatedAbbrev = _database.GenerateAbbreviation(_generatedName);
+            }
         }
     }
 }
