@@ -5,7 +5,7 @@ using SilentOrchestra.Shell;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SilentOrchestra.Theaters
+namespace SilentOrchestra.Orchestra
 {
     [Serializable]
     public struct AgentStats

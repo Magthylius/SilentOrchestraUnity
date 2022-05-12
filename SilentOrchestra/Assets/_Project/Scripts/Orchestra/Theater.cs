@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SilentOrchestra.Shell;
 using UnityEngine;
 
-namespace SilentOrchestra.Theaters
+namespace SilentOrchestra.Orchestra
 {
     [System.Serializable]
     public class Theater 

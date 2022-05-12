@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SilentOrchestra.Theaters
+namespace SilentOrchestra.Orchestra
 {
     [System.Serializable]
     public class Agency 

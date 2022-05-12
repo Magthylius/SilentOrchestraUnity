@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using SilentOrchestra.Shell;
-using SilentOrchestra.Theaters;
+using SilentOrchestra.Orchestra;
 using UnityEngine;
 
 namespace SilentOrchestra.Core
