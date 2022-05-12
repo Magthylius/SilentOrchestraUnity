@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Magthylius;
 using UnityEngine;
 
 namespace SilentOrchestra.Shell
@@ -10,5 +11,8 @@ namespace SilentOrchestra.Shell
         public string[] codenames;
         public string[] firstNames;
         public string[] lastNames;
+        
+        public string RandomCodename => RandomEx.Element(codenames);
+        public string RandomName => $"{RandomEx.Element(firstNames)} {RandomEx.Element(lastNames)}";
     }
 }

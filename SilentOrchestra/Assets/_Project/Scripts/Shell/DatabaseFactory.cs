@@ -13,11 +13,8 @@ namespace SilentOrchestra.Shell
         [SerializeField] private OccupationDatabase occupations;
         [SerializeField] private SettingsDatabase settings;
 
-        public static string RandomCodename => 
-            RandomEx.Element(Instance.names.codenames);
-        
-        public static string RandomName =>
-            $"{RandomEx.Element(Instance.names.firstNames)} {RandomEx.Element(Instance.names.lastNames)}";
+        public static string RandomCodename => Instance.names.RandomCodename;
+        public static string RandomName => Instance.names.RandomName;
 
         public static string RandomID => Random.Range(1, 10000).ToString();
         

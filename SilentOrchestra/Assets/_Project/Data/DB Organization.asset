@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14a7a9d5448c7145b181c561045feac, type: 3}
+  m_Name: DB Organization
+  m_EditorClassIdentifier: 
+  organizationBaseTerms:
+  - Agency
+  - Bureau
+  - Comittee
+  - Board
+  - Service
+  - Ministry
+  - Department
+  - Branch
+  - Special Branch
+  - Center
+  - Secretariat
+  - Organization
+  - Council
+  - Command
+  - Headquarters
+  - Authority
+  - Division
+  - Office
+  organizationAdjectiveTerms:
+  - Central
+  - Federal
+  - Secret
+  - Directorate
+  - State
+  - General
+  - National
+  - Judicial
+  - Joint
+  - Strategic
+  organizationObjectTerms:
+  - Intelligence
+  - Security
+  - Military
+  - Justice
+  - Emergencies
+  - Tactics
+  - Information
+  organizationActionTerms:
+  - Investigation
+  - Operations
+  - Defense
+  - Coordination
+  - Rapid Actions
+  - Affairs

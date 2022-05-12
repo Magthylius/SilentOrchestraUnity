@@ -9,18 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2e7e328fdce5854aaf7cdec175843c9, type: 3}
-  m_Name: SO Names
+  m_Script: {fileID: 11500000, guid: 3b02ddaa1e5b57746bf789b8de9a318f, type: 3}
+  m_Name: DB Occupations
   m_EditorClassIdentifier: 
-  codenames:
-  - Asotiga
-  - Blue
-  - Tiffent
-  firstNames:
-  - Aaron
-  - Daniel
-  - Chris
-  lastNames:
-  - Balls
-  - Dick
-  - Bruh
+  occupations:
+  - Teacher
