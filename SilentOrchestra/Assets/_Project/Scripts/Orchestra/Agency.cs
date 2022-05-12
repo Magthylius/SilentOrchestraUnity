@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace SilentOrchestra.Orchestra
         public List<Operation> Operations { get; private set; } = new List<Operation>();
 
         private string _name;
-        private Government _belongingGovernment;
+        [NonSerialized] private Government _belongingGovernment;
 
         public Agency(int agentAmount)
         {
@@ -30,5 +31,6 @@ namespace SilentOrchestra.Orchestra
 
         public string Name => _name;
         public Government Government => _belongingGovernment;
+        public int AgentCount => Agents.Count;
     }
 }

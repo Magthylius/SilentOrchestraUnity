@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Magthylius;
 using SilentOrchestra.Shell;
 using SilentOrchestra.Orchestra;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace SilentOrchestra.Core
         public List<Government> AllGovernments { get; private set; } = new List<Government>();
         public List<Agency> AllAgencies { get; private set; } = new List<Agency>();
         public List<Agent> AllAgents { get; private set; } = new List<Agent>();
+        public Agency PlayerAgency { get; private set; }
         public Action<Theater> OnTheaterCreated;
         #endregion
         
@@ -41,7 +43,14 @@ namespace SilentOrchestra.Core
             foreach (Government government in AllGovernments) AllAgencies.AddRange(government.Agencies);
             foreach (Agency agency in AllAgencies) AllAgents.AddRange(agency.Agents);
             
+            SetPlayerAgency(AllAgencies.GetRandom());
+            
             OnTheaterCreated?.Invoke(_currentTheater);
+        }
+
+        public void SetPlayerAgency(Agency playerAgency)
+        {
+            PlayerAgency = playerAgency;
         }
     }
 }
