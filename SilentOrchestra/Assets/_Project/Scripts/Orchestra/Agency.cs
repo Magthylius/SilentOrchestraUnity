@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SilentOrchestra.Shell;
 using UnityEngine;
 
 namespace SilentOrchestra.Orchestra
@@ -17,6 +18,7 @@ namespace SilentOrchestra.Orchestra
         public Agency(int agentAmount)
         {
             RegenerateAgents(agentAmount);
+            _name = DatabaseFactory.RandomAgencyName;
         }
 
         public void RegenerateAgents(int amount)

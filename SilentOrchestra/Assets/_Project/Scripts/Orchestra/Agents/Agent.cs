@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using SilentOrchestra.Shell;
-using UnityEngine;
 
 namespace SilentOrchestra.Orchestra
 {
-    [System.Serializable]
+    [Serializable]
     public class Agent
     {
         public string name;
