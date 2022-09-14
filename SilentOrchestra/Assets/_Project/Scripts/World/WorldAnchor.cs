@@ -7,8 +7,8 @@ namespace SilentOrchestra.World
 {
     public class WorldAnchor : HardSingleton<WorldAnchor>
     {
-        [SerializeField] private WorldGenerator _generator;
+        [SerializeField] private WorldGenerator generator;
 
-        public static WorldGenerator Generator => Instance._generator;
+        public static WorldGenerator Generator => Instance.generator;
     }
 }
