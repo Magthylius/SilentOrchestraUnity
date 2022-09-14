@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 261.89948, g: 324.4541, b: 429.4325, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b9ec63856735b44ac16e8ecf02cc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generationAnchor: 0
   gridSize: {x: 15, y: 15}
   randomizeColor: 1
   hexSettings:
@@ -173,7 +174,7 @@ MonoBehaviour:
     innerSize: 0
     outerSize: 1
     height: 1
-    hasHalfAngleOffset: 1
+    hasHalfAngleOffset: 0
   addMeshCollider: 1
 --- !u!4 &80566023
 Transform:
