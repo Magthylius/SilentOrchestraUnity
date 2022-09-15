@@ -2,23 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Magthylius;
-using SilentOrchestra.Shell;
 using UnityEngine;
 
 namespace SilentOrchestra.Core
 {
+    using SilentOrchestra.Shell;
+    using SilentOrchestra.World;
+    
     public class CoreSystem : SoftSingleton<CoreSystem>
     {
         #region Serialized Fields
+        [SerializeField] private ProjectConfig projectConfig;
         [SerializeField] private TimeController timeController;
         [SerializeField] private TheaterController theaterController;
         #endregion
         
-        void Start()
+        private void Start()
         {
-            GameSettings.ResetToDefaultSettings();
+            projectConfig.OverrideGameSettings();
             timeController.Initialize(this, DateTime.Now);
             theaterController.Initialize(this);
+            
+            WorldAnchor.Generator.Initialize();
         }
 
         public TheaterController Theater => theaterController;

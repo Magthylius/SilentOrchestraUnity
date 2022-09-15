@@ -85,7 +85,7 @@ namespace SilentOrchestra.Orchestra
         public DateTime DateOfBirth;
 
         public int Age =>
-            Mathf.RoundToInt((float)(GameRuntimeData.CurrentDateTime - DateOfBirth).TotalDays / GameSettings.kTotalDaysPerYear);
+            Mathf.RoundToInt((float)(GameRuntimeData.CurrentDateTime - DateOfBirth).TotalDays / GameSettings.KTotalDaysPerYear);
 
         public static PersonaInfo Randomized
         {
@@ -96,7 +96,7 @@ namespace SilentOrchestra.Orchestra
                 info.gender = Random.Range(0, 2) == 0 ? "Male" : "Female";
                 info.occupation = DatabaseFactory.RandomOccupation;
 
-                float randomAgeInDays = DatabaseFactory.RandomAge * GameSettings.kTotalDaysPerYear;
+                float randomAgeInDays = DatabaseFactory.RandomAge * GameSettings.KTotalDaysPerYear;
                 info.DateOfBirth = GameRuntimeData.CurrentDateTime - TimeSpan.FromDays(randomAgeInDays);
                 return info;
             }

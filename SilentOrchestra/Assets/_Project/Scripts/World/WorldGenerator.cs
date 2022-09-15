@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Magthylius;
 using Magthylius.Components;
 using UnityEngine;
 
 namespace SilentOrchestra.World
 {
+    using SilentOrchestra.Shell;
+    
     public class WorldGenerator : MonoBehaviour
     {
         [SerializeField] private HexGridGenerator hexGridGenerator;
@@ -14,7 +17,6 @@ namespace SilentOrchestra.World
         private void OnEnable()
         {
             hexGridGenerator.OnHexTileCreated += OnHexTileCreated;
-            hexGridGenerator.GenerateGrid();
         }
 
         private void OnDisable()
@@ -22,10 +24,17 @@ namespace SilentOrchestra.World
             hexGridGenerator.OnHexTileCreated -= OnHexTileCreated;
         }
 
+        public void Initialize()
+        {
+            hexGridGenerator.GenerateGrid(GameSettings.WorldGridSize);
+        }
+
         private void OnHexTileCreated(HexTile hexTile)
         {
             var worldTile = hexTile.gameObject.AddComponent<WorldTile>();
             _allTiles.Add(hexTile.Coordinates, worldTile);
         }
+
+        
     }
 }

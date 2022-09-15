@@ -772,6 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5caee4c46efa1ae4497fc513012dad24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectConfig: {fileID: 11400000, guid: 8376f79afd466e7418f5ec6554052f70, type: 2}
   timeController: {fileID: 724774406}
   theaterController: {fileID: 724774409}
 --- !u!4 &724774408
@@ -1795,7 +1796,7 @@ PrefabInstance:
     - target: {fileID: 2842890160829211714, guid: 349cf815680462b43bd29488b16a3a91,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2842890160829211714, guid: 349cf815680462b43bd29488b16a3a91,
         type: 3}
@@ -1805,12 +1806,12 @@ PrefabInstance:
     - target: {fileID: 2842890160829211714, guid: 349cf815680462b43bd29488b16a3a91,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2842890160829211714, guid: 349cf815680462b43bd29488b16a3a91,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2842890160829211714, guid: 349cf815680462b43bd29488b16a3a91,
         type: 3}
@@ -1855,12 +1856,12 @@ PrefabInstance:
     - target: {fileID: 2842890160829211714, guid: 349cf815680462b43bd29488b16a3a91,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2842890160829211714, guid: 349cf815680462b43bd29488b16a3a91,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2842890160829211714, guid: 349cf815680462b43bd29488b16a3a91,
         type: 3}
