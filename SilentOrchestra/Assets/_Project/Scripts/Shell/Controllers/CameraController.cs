@@ -88,7 +88,7 @@ namespace SilentOrchestra.Shell
                     _pivotCurrentPosition = mousePos;
                     var difference = _pivotStartPosition - _pivotCurrentPosition;
                     _pivotStartPosition = _pivotCurrentPosition;
-                    _targetRotation *= Quaternion.Euler(Vector3.up * (-difference.x * pivotSensitivity));
+                    _targetRotation *= Quaternion.Euler(Vector3.up * ((-difference.x - difference.y) * pivotSensitivity));
                     break;
             }
         }
