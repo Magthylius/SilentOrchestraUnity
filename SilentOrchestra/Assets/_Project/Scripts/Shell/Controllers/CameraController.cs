@@ -22,6 +22,8 @@ namespace SilentOrchestra.Shell
 
         #region Private Fields
         private Transform _followTransform;
+        private Vector3 _camForwardVector;
+        private Plane _dragPlane;
         
         private float _currentMovementSpeed = 1f;
         private Vector3 _targetPosition;
@@ -38,6 +40,9 @@ namespace SilentOrchestra.Shell
         
         private void Start()
         {
+            _camForwardVector = transform.InverseTransformVector(CamTransform.forward);
+            _dragPlane = new Plane(Vector3.up, Vector3.zero);
+            
             _targetPosition = transform.position;
             _targetRotation = transform.rotation;
             _targetZoomPosition = CamTransform.localPosition;
@@ -74,10 +79,9 @@ namespace SilentOrchestra.Shell
             switch (_mouseMode)
             {
                 case MouseControlMode.Drag:
-                    var plane = new Plane(Vector3.up, Vector3.zero);
                     var ray = mainCamera.ScreenPointToRay(mousePos);
 
-                    if (plane.Raycast(ray, out var entry))
+                    if (_dragPlane.Raycast(ray, out var entry))
                     {
                         _dragCurrentPosition = ray.GetPoint(entry);
                         _targetPosition = transform.position + (_dragStartPosition - _dragCurrentPosition) * dragSensitivity;
@@ -98,7 +102,7 @@ namespace SilentOrchestra.Shell
             var moveInput = ShellAnchor.Input.MovementInput;
             _targetPosition += (transform.forward * moveInput.y + transform.right * moveInput.x) * _currentMovementSpeed;
             _targetRotation *= Quaternion.Euler(Vector3.up * (ShellAnchor.Input.RotationInput * rotationSpeed));
-            _targetZoomPosition += CamTransform.forward * (ShellAnchor.Input.ZoomInput * zoomSpeed);
+            _targetZoomPosition += _camForwardVector * (ShellAnchor.Input.ZoomInput * zoomSpeed);
         }
 
         private void HandleTransitions()

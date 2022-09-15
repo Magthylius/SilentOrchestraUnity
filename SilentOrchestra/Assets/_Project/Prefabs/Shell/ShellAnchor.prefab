@@ -261,7 +261,7 @@ MonoBehaviour:
   rotationSpeed: 0.5
   zoomSpeed: 0.1
   dragSensitivity: 3
-  pivotSensitivity: 0.03
+  pivotSensitivity: 0.05
 --- !u!1 &736263491247537525
 GameObject:
   m_ObjectHideFlags: 0
