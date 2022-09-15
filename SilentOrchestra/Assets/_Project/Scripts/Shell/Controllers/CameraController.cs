@@ -1,7 +1,6 @@
-using SilentOrchestra.Shell;
 using UnityEngine;
 
-namespace SilentOrchestra.Core
+namespace SilentOrchestra.Shell
 {
     public class CameraController : MonoBehaviour
     {
