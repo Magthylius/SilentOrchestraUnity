@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
-using Magthylius;
 using Magthylius.Components;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace SilentOrchestra.World
@@ -35,6 +34,10 @@ namespace SilentOrchestra.World
             _allTiles.Add(hexTile.Coordinates, worldTile);
         }
 
-        
+        [Button("Generate Grid")]
+        public void GenerateGridInEditor()
+        {
+            hexGridGenerator.GenerateGrid(GameSettings.WorldGridSize);
+        }
     }
 }
