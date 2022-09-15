@@ -19,6 +19,7 @@ namespace SilentOrchestra.Shell
         private InputAction _moveAction;
         private InputAction _rotateAction;
         private InputAction _zoomAction;
+        private InputAction _mousePositionAction;
         private readonly Dictionary<(string inputName, InputActionPhase phase), Action> _mainActions = new();
         #endregion
 
@@ -27,6 +28,7 @@ namespace SilentOrchestra.Shell
             _moveAction = inputActionMap.FindAction("Main/Move", true);
             _rotateAction = inputActionMap.FindAction("Main/Rotate", true);
             _zoomAction = inputActionMap.FindAction("Main/Zoom", true);
+            _mousePositionAction = inputActionMap.FindAction("Main/MousePosition", true);
             SetupDictionaries("Main", MainMappings, _mainActions);
         }
 
@@ -66,5 +68,6 @@ namespace SilentOrchestra.Shell
         public Vector2 MovementInput => _moveAction.ReadValue<Vector2>();
         public float RotationInput => _rotateAction.ReadValue<float>();
         public float ZoomInput => _zoomAction.ReadValue<float>();
+        public Vector2 MousePosition => _mousePositionAction.ReadValue<Vector2>();
     }
 }

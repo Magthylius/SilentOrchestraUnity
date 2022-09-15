@@ -1870,12 +1870,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02fb5cf236f78f44ead09c954c482a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 282127411}
+  mainCamera: {fileID: 282127410}
+  transitionLerpSpeed: 5
   normalMoveSpeed: 0.5
   fastMoveSpeed: 3
   rotationSpeed: 0.5
   zoomSpeed: 0.1
-  transitionLerpSpeed: 5
+  dragSensitivity: 3
+  pivotSensitivity: 0.03
 --- !u!1001 &736263492114439320
 PrefabInstance:
   m_ObjectHideFlags: 0
