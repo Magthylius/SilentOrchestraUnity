@@ -1,8 +1,8 @@
 {
-    "name": "SilentOrchestra.World",
-    "rootNamespace": "SilentOrchestra.World",
+    "name": "SilentOrchestra.World.Editors",
+    "rootNamespace": "SilentOrchestra.World.Editors",
     "references": [
-        "GUID:7ea3b408d7aade14b9aadab9c1a4c770",
+        "GUID:a7f8f9359a26cb84badcf121289c6551",
         "GUID:6967aba9fc1d24e4c999a95627d19316",
         "GUID:776d03a35f1b52c4a9aed9f56d7b4229"
     ],
@@ -12,7 +12,9 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
+    "defineConstraints": [
+        "UNITY_EDITOR"
+    ],
     "versionDefines": [],
     "noEngineReferences": false
 }

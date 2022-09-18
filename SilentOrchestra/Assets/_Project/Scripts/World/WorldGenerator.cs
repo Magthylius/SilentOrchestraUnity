@@ -9,7 +9,7 @@ namespace SilentOrchestra.World
     
     public class WorldGenerator : MonoBehaviour
     {
-        [SerializeField] private HexGridGenerator hexGridGenerator;
+        [SerializeField] protected HexGridGenerator hexGridGenerator;
 
         private readonly Dictionary<Vector2Int, WorldTile> _allTiles = new();
 
@@ -32,12 +32,6 @@ namespace SilentOrchestra.World
         {
             var worldTile = hexTile.gameObject.AddComponent<WorldTile>();
             _allTiles.Add(hexTile.Coordinates, worldTile);
-        }
-
-        [Button("Generate Grid")]
-        public void GenerateGridInEditor()
-        {
-            hexGridGenerator.GenerateGrid(GameSettings.WorldGridSize);
         }
     }
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da0e3d65b78c5b42aa10af2874150dd, type: 3}
+  m_Name: WorldCollapseData
+  m_EditorClassIdentifier: 
+  samples:
+  - selfType: 0
+    possibleTiles: 0000000001000000030000000400000005000000
+  - selfType: 1
+    possibleTiles: 0100000002000000030000000400000005000000
+  - selfType: 2
+    possibleTiles: 0200000003000000
+  - selfType: 3
+    possibleTiles: 030000000000000001000000030000000400000005000000
+  - selfType: 4
+    possibleTiles: 040000000000000003000000
+  - selfType: 5
+    possibleTiles: 0500000001000000030000000400000006000000
