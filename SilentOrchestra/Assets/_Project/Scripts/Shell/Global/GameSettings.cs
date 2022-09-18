@@ -14,6 +14,8 @@ namespace SilentOrchestra.Shell
 
         public static Vector2Int WorldGridSize = new Vector2Int(100, 100);
 
+        public static readonly Dictionary<WorldTileType, Color> WorldTileColors = new();
+
         public static void ResetToDefaultSettings()
         {
             AgentsPerAgency = 10;
@@ -29,6 +31,12 @@ namespace SilentOrchestra.Shell
             AgenciesPerGovernment = config.agenciesPerGovernment;
             GovernmentsPerTheater = config.governmentsPerTheater;
             WorldGridSize = config.worldGridSize;
+
+            foreach (var tileColor in config.worldTileColors)
+            {
+                if (WorldTileColors.ContainsKey(tileColor.type)) continue;;
+                WorldTileColors.Add(tileColor.type, tileColor.color);
+            }
         }
     }
 }

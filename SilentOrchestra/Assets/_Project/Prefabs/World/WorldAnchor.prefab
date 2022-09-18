@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generationAnchor: 0
-  gridSize: {x: 15, y: 15}
-  randomizeColor: 1
+  randomizeColor: 0
+  uninitializedColor: {r: 0, g: 0, b: 0, a: 1}
   hexSettings:
     hexMaterial: {fileID: 2100000, guid: 6d74a38c50af43748924f3ec819d1bc9, type: 2}
     innerSize: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SilentOrchestra.World
+namespace SilentOrchestra.Shell
 {
     public enum WorldTileType
     {

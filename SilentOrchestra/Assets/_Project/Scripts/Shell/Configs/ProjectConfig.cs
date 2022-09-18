@@ -12,9 +12,18 @@ namespace SilentOrchestra.Shell
         public int governmentsPerTheater = 4;
         public Vector2Int worldGridSize = new Vector2Int(100, 100);
 
+        public WorldTileColor[] worldTileColors;
+
         public void OverrideGameSettings()
         {
             GameSettings.LoadFromProjectConfig(this);
         }
+    }
+
+    [System.Serializable]
+    public struct WorldTileColor
+    {
+        public WorldTileType type;
+        public Color color;
     }
 }

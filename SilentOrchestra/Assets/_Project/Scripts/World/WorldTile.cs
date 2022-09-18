@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace SilentOrchestra.World
 {
+    using SilentOrchestra.Shell;
+    
     [RequireComponent(typeof(HexTile))]
     public class WorldTile : MonoBehaviour
     {

@@ -1,13 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Magthylius.Collections;
-using Magthylius.Components;
 using UnityEngine;
 
 namespace SilentOrchestra.World
 {
+    using SilentOrchestra.Shell;
+    
     [CreateAssetMenu(fileName = "WorldCollapseData", menuName = "SilentOrchestra/WorldCollapseData")]
     public class WorldCollapseData : ScriptableObject
     {
