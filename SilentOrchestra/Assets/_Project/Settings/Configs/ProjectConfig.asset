@@ -15,6 +15,7 @@ MonoBehaviour:
   agentsPerAgency: 10
   agenciesPerGovernment: 1
   governmentsPerTheater: 4
+  worldCollapseData: {fileID: 11400000, guid: 211f7f416c7ab1a4a945493a71145825, type: 2}
   worldGridSize: {x: 20, y: 25}
   worldTileColors:
   - type: 0

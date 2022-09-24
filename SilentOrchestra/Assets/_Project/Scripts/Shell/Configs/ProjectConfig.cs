@@ -10,12 +10,15 @@ namespace SilentOrchestra.Shell
         public int agentsPerAgency = 10;
         public int agenciesPerGovernment = 1;
         public int governmentsPerTheater = 4;
-        public Vector2Int worldGridSize = new Vector2Int(100, 100);
 
+        [Header("World")]
+        public WorldCollapseData worldCollapseData;
+        public Vector2Int worldGridSize = new Vector2Int(100, 100);
         public WorldTileColor[] worldTileColors;
 
         public void OverrideGameSettings()
         {
+            worldCollapseData.TabulateSamples();
             GameSettings.LoadFromProjectConfig(this);
         }
     }

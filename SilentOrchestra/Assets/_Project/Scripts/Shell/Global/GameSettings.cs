@@ -12,8 +12,8 @@ namespace SilentOrchestra.Shell
         public static int AgenciesPerGovernment = 1;
         public static int GovernmentsPerTheater = 4;
 
+        public static WorldCollapseData WorldCollapseData;
         public static Vector2Int WorldGridSize = new Vector2Int(100, 100);
-
         public static readonly Dictionary<WorldTileType, Color> WorldTileColors = new();
 
         public static void ResetToDefaultSettings()
@@ -30,8 +30,9 @@ namespace SilentOrchestra.Shell
             AgentsPerAgency = config.agentsPerAgency;
             AgenciesPerGovernment = config.agenciesPerGovernment;
             GovernmentsPerTheater = config.governmentsPerTheater;
-            WorldGridSize = config.worldGridSize;
 
+            WorldCollapseData = config.worldCollapseData;
+            WorldGridSize = config.worldGridSize;
             foreach (var tileColor in config.worldTileColors)
             {
                 if (WorldTileColors.ContainsKey(tileColor.type)) continue;;

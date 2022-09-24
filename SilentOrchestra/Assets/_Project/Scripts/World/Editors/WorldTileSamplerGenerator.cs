@@ -7,6 +7,8 @@ using UnityEngine;
 
 namespace SilentOrchestra.World.Editors
 {
+    using SilentOrchestra.Shell;
+    
     public class WorldTileSamplerGenerator : WorldGenerator
     {
         [SerializeField] private Vector2Int gridSize;
@@ -32,13 +34,6 @@ namespace SilentOrchestra.World.Editors
         [Button("Generate Sample Data")]
         public void GenerateSampleData()
         {
-            foreach (var tile in sampleTiles)
-            {
-                collapseData.PopulateData(tile);
-            }
-
-            collapseData.CleanUpData();
-            EditorUtility.SetDirty(collapseData);
         }
     }
 }
