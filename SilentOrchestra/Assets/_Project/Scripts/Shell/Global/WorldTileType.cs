@@ -7,7 +7,6 @@ namespace SilentOrchestra.Shell
     public enum WorldTileType
     {
         Plains,
-        Road,
         City,
         Rural,
         Forest,

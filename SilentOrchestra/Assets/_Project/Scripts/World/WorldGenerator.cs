@@ -67,20 +67,50 @@ namespace SilentOrchestra.World
                 }
             }
 
+            int failsafe = 0;
+            while (HasUncollapsedPotentials())
+            {
+                failsafe++;
+                if (failsafe > 1000)
+                {
+                    Debug.LogWarning("potentials failed");
+                    ColorAllCollapsedDomains();
+                    return;
+                }
+                CollapseRandomDomain();
+                HandlePropagation();
+            }
+
             void CollapseRandomDomain()
             {
                 var randomX = Random.Range(0, gridSize.x);
                 var randomY = Random.Range(0, gridSize.y);
-                _domains[randomX, randomY].ForceCollapse(allTypes.GetRandom());
+                var domain = _domains[randomX, randomY];
+
+                while (domain.Potentials.Count < 2)
+                {
+                    randomX = Random.Range(0, gridSize.x);
+                    randomY = Random.Range(0, gridSize.y);
+                    domain = _domains[randomX, randomY];
+                };
+
+                domain.ForceCollapse(allTypes.GetRandom());
                 
                 propagationStack.Push(_domains[randomX, randomY]);
-                HandlePropagation();
             }
 
             void HandlePropagation()
             {
+                int failsafe = 0;
                 while (propagationStack.Count > 0)
                 {
+                    failsafe++;
+                    if (failsafe > 10000)
+                    {
+                        Debug.LogWarning("propagation failed");
+                        return;
+                    }
+                    
                     var domain = propagationStack.Pop();
                     var coords = domain.Coordinates;
 
@@ -120,6 +150,8 @@ namespace SilentOrchestra.World
                         PropagateToDomain(ref domain, ref target);
                     }
                 }
+
+                ColorAllCollapsedDomains();
             }
 
             int PropagateToDomain(ref TileDomain source, ref TileDomain target)
@@ -135,6 +167,27 @@ namespace SilentOrchestra.World
                     return 1;
                 }
                 return 0;
+            }
+
+            void ColorAllCollapsedDomains()
+            {
+                foreach (var domain in _domains)
+                {
+                    if (domain.HasCollapsed)
+                    {
+                        _allTiles[domain.Coordinates].Type = domain.Potentials[0];
+                    }
+                }
+            }
+
+            bool HasUncollapsedPotentials()
+            {
+                foreach (var domain in _domains)
+                {
+                    if (domain.Potentials.Count > 1) return true;
+                }
+
+                return false;
             }
         }
 

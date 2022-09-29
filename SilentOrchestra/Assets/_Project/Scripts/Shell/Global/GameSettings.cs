@@ -35,7 +35,7 @@ namespace SilentOrchestra.Shell
             WorldGridSize = config.worldGridSize;
             foreach (var tileColor in config.worldTileColors)
             {
-                if (WorldTileColors.ContainsKey(tileColor.type)) continue;;
+                if (WorldTileColors.ContainsKey(tileColor.type)) continue;
                 WorldTileColors.Add(tileColor.type, tileColor.color);
             }
         }
