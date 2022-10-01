@@ -16,9 +16,13 @@ namespace SilentOrchestra.World
         [SerializeField] protected HexGridGenerator hexGridGenerator;
 
         private readonly Dictionary<Vector2Int, WorldTile> _allTiles = new();
-        private readonly Queue<WorldTile> _propagationQueue = new();
-
+        
         private TileDomain[,] _domains;
+        private readonly Stack<TileDomain> _propagationStack = new();
+
+        private TileDomain[,] _domainsCache;
+        private (Vector2Int coordinates, WorldTileType type) _guessedTile;
+
 
         private void OnEnable()
         {
@@ -51,151 +55,187 @@ namespace SilentOrchestra.World
             }
             StartCollapseGeneration();
         }
-
+        
         private void StartCollapseGeneration()
         {
-            var gridSize = GameSettings.WorldGridSize;
-            var allTypes = Enum.GetValues(typeof(WorldTileType)).Cast<WorldTileType>().ToList();
-            var propagationStack = new Stack<TileDomain>();
-
-            _domains = new TileDomain[gridSize.x, gridSize.y];
-            for (int y = 0; y < gridSize.y; y++)
+            var cachedTypes = AllTileTypes;
+            _domains = new TileDomain[GridSize.x, GridSize.y];
+            for (int y = 0; y < GridSize.y; y++)
             {
-                for (int x = 0; x < gridSize.x; x++)
+                for (int x = 0; x < GridSize.x; x++)
                 {
-                    _domains[x, y] = new TileDomain(new Vector2Int(x,y), new List<WorldTileType>(allTypes));
+                    _domains[x, y] = new TileDomain(new Vector2Int(x,y), new List<WorldTileType>(cachedTypes));
                 }
             }
 
-            int failsafe = 0;
-            while (HasUncollapsedPotentials())
+            int loops = 0;
+            while (_propagationStack.Count <= 0 && HasUncollapsedPotentials())
             {
-                failsafe++;
-                if (failsafe > 1000)
+                loops++;
+                if (loops > 1000)
                 {
                     Debug.LogWarning("potentials failed");
                     ColorAllCollapsedDomains();
                     return;
                 }
-                CollapseRandomDomain();
-                HandlePropagation();
-            }
-
-            void CollapseRandomDomain()
-            {
-                var randomX = Random.Range(0, gridSize.x);
-                var randomY = Random.Range(0, gridSize.y);
-                var domain = _domains[randomX, randomY];
-
-                while (domain.Potentials.Count < 2)
-                {
-                    randomX = Random.Range(0, gridSize.x);
-                    randomY = Random.Range(0, gridSize.y);
-                    domain = _domains[randomX, randomY];
-                };
-
-                domain.ForceCollapse(allTypes.GetRandom());
                 
-                propagationStack.Push(_domains[randomX, randomY]);
+                _domainsCache = CloneArray(in _domains);
+                _guessedTile = CollapseRandomDomain();
+                
+                //! If bad propagation - revert and remove
+                if (!HandlePropagation())
+                {
+                    print($"bad propagation: reverting on loop {loops}");
+                    _domains = CloneArray(in _domainsCache);
+                    _propagationStack.Clear();
+
+                    var coords = _guessedTile.coordinates;
+                    _domains[coords.x, coords.y].Potentials.Remove(_guessedTile.type);
+                }
+
+                print($"loop {loops}: {_propagationStack.Count} {HasUncollapsedPotentials()}");
             }
 
-            void HandlePropagation()
+            TileDomain[,] CloneArray(in TileDomain[,] source)
             {
-                int failsafe = 0;
-                while (propagationStack.Count > 0)
+                int width = source.GetLength(0);
+                int height = source.GetLength(1);
+                
+                var target = new TileDomain[width, height];
+                for (int y = 0; y < height; y++)
                 {
-                    failsafe++;
-                    if (failsafe > 10000)
+                    for (int x = 0; x < width; x++)
                     {
-                        Debug.LogWarning("propagation failed");
-                        return;
-                    }
-                    
-                    var domain = propagationStack.Pop();
-                    var coords = domain.Coordinates;
-
-                    if (coords.x < gridSize.x - 1 && coords.y < gridSize.y - 1)
-                    {
-                        var target = _domains[coords.x + 1, coords.y + 1];
-                        PropagateToDomain(ref domain, ref target);
-                    }
-                    
-                    if (coords.x < gridSize.x - 1)
-                    {
-                        var target = _domains[coords.x + 1, coords.y];
-                        PropagateToDomain(ref domain, ref target);
-                    }
-                    
-                    if (coords.x < gridSize.x - 1 && coords.y > 0)
-                    {
-                        var target = _domains[coords.x + 1, coords.y - 1];
-                        PropagateToDomain(ref domain, ref target);
-                    }
-                    
-                    if (coords.y > 0)
-                    {
-                        var target = _domains[coords.x, coords.y - 1];
-                        PropagateToDomain(ref domain, ref target);
-                    }
-                    
-                    if (coords.x > 0)
-                    {
-                        var target = _domains[coords.x - 1, coords.y];
-                        PropagateToDomain(ref domain, ref target);
-                    }
-                    
-                    if (coords.y < gridSize.y - 1)
-                    {
-                        var target = _domains[coords.x, coords.y + 1];
-                        PropagateToDomain(ref domain, ref target);
+                        target[x, y] = source[x, y].Clone();
                     }
                 }
 
-                ColorAllCollapsedDomains();
-            }
-
-            int PropagateToDomain(ref TileDomain source, ref TileDomain target)
-            {
-                if (target.HasCollapsed) return 0;
-                int potCount = target.Potentials.Count;
-                GameSettings.WorldCollapseData.FromInclusives(ref target.Potentials, source.Potentials);
-
-                if (target.Potentials.Count == 0) return -1;
-                if (potCount > target.Potentials.Count)
-                {
-                    propagationStack.Push(target);
-                    return 1;
-                }
-                return 0;
-            }
-
-            void ColorAllCollapsedDomains()
-            {
-                foreach (var domain in _domains)
-                {
-                    if (domain.HasCollapsed)
-                    {
-                        _allTiles[domain.Coordinates].Type = domain.Potentials[0];
-                    }
-                }
-            }
-
-            bool HasUncollapsedPotentials()
-            {
-                foreach (var domain in _domains)
-                {
-                    if (domain.Potentials.Count > 1) return true;
-                }
-
-                return false;
+                return target;
             }
         }
-
-        public void QueuePropagation(List<WorldTile> worldTiles)
+        
+        private (Vector2Int coordinates, WorldTileType type) CollapseRandomDomain()
         {
-            worldTiles.ForEach(tile => _propagationQueue.Enqueue(tile));
+            var randomX = Random.Range(0, GridSize.x);
+            var randomY = Random.Range(0, GridSize.y);
+            var domain = _domains[randomX, randomY];
+
+            while (domain.Potentials.Count < 2)
+            {
+                randomX = Random.Range(0, GridSize.x);
+                randomY = Random.Range(0, GridSize.y);
+                domain = _domains[randomX, randomY];
+            };
+
+            var randomType = domain.Potentials.GetRandom();
+            domain.ForceCollapse(randomType);
+            print((domain.Coordinates, randomType));
+            _propagationStack.Push(domain);
+            return (domain.Coordinates, randomType);
         }
 
+        private bool HandlePropagation()
+        {
+            int failsafe = 0;
+            while (_propagationStack.Count > 0)
+            {
+                failsafe++;
+                if (failsafe > 10000)
+                {
+                    Debug.LogWarning("propagation failed");
+                    return false;
+                }
+                
+                var domain = _propagationStack.Pop();
+                var coords = domain.Coordinates;
+
+                if (coords.x < GridSize.x - 1 && coords.y < GridSize.y - 1)
+                {
+                    var target = _domains[coords.x + 1, coords.y + 1];
+                    if (PropagateToDomain(ref domain, ref target) < 0) return false;
+                }
+                
+                if (coords.x < GridSize.x - 1)
+                {
+                    var target = _domains[coords.x + 1, coords.y];
+                    if (PropagateToDomain(ref domain, ref target) < 0) return false;
+                }
+                
+                if (coords.x < GridSize.x - 1 && coords.y > 0)
+                {
+                    var target = _domains[coords.x + 1, coords.y - 1];
+                    if (PropagateToDomain(ref domain, ref target) < 0) return false;
+                }
+                
+                if (coords.y > 0)
+                {
+                    var target = _domains[coords.x, coords.y - 1];
+                    if (PropagateToDomain(ref domain, ref target) < 0) return false;
+                }
+                
+                if (coords.x > 0)
+                {
+                    var target = _domains[coords.x - 1, coords.y];
+                    if (PropagateToDomain(ref domain, ref target) < 0) return false;
+                }
+                
+                if (coords.y < GridSize.y - 1)
+                {
+                    var target = _domains[coords.x, coords.y + 1];
+                    if (PropagateToDomain(ref domain, ref target) < 0) return false;
+                }
+            }
+
+            ColorAllCollapsedDomains();
+            return true;
+        }
+
+        private int PropagateToDomain(ref TileDomain source, ref TileDomain target)
+        {
+            if (target.HasCollapsed) return 0;
+            int potCount = target.Potentials.Count;
+            GameSettings.WorldCollapseData.FromInclusives(ref target.Potentials, source.Potentials);
+            if (target.Potentials.Count == 0) return -1;
+            
+            //! Target has potentials changed
+            if (potCount != target.Potentials.Count)
+            {
+                _propagationStack.Push(target);
+                return 1;
+            }
+            return 0;
+        }
+
+        private void ColorAllCollapsedDomains()
+        {
+            foreach (var domain in _domains)
+            {
+                if (domain.HasCollapsed)
+                {
+                    _allTiles[domain.Coordinates].Type = domain.Potentials[0];
+                }
+            }
+        }
+
+        private bool HasUncollapsedPotentials()
+        {
+            foreach (var domain in _domains)
+            {
+                if (domain.Potentials.Count > 1) return true;
+                else if (domain.Potentials.Count < 1)
+                {
+                    Debug.LogWarning($"Broken domain! {domain.Coordinates}");
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        private Vector2Int GridSize => GameSettings.WorldGridSize;
+        private List<WorldTileType> AllTileTypes => Enum.GetValues(typeof(WorldTileType)).Cast<WorldTileType>().ToList();
+
+        #region Declarations
         public class TileDomain
         {
             public Vector2Int Coordinates;
@@ -204,7 +244,7 @@ namespace SilentOrchestra.World
             public TileDomain(Vector2Int coordinates, List<WorldTileType> potentials)
             {
                 Coordinates = coordinates;
-                Potentials = potentials;
+                Potentials = new List<WorldTileType>(potentials);
             }
             
             public void ForceCollapse(WorldTileType type)
@@ -213,8 +253,16 @@ namespace SilentOrchestra.World
                 Potentials.Add(type);
             }
 
+            public TileDomain Clone()
+            {
+                var clone = new TileDomain(Coordinates, Potentials);
+                return clone;
+            }
+
             public WorldTileType FirstType => Potentials.GetEnumerator().Current;
+
             public bool HasCollapsed => Potentials.Count == 1;
         }
+        #endregion
     }
 }

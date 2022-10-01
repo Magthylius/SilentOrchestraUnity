@@ -19,39 +19,32 @@ namespace SilentOrchestra.Shell
             var allTypesCache = AllTileTypes;
             foreach (var sample in samples)
             {
-                if (!_tabulatedSamples.ContainsKey(sample.selfType))
+                if (!_inclusiveSamples.ContainsKey(sample.selfType))
                 {
-                    var inclusives = new List<WorldTileType>(sample.possibleTiles);
-                    var exclusives = new List<WorldTileType>(allTypesCache).Except(inclusives).ToList();
-                    _tabulatedSamples.Add(sample.selfType, (inclusives, exclusives));
+                    _inclusiveSamples.Add(sample.selfType, sample.possibleTiles);
                 }
             }
         }
 
         public void FromInclusives(ref List<WorldTileType> currentPotentials, List<WorldTileType> filters)
         {
-            foreach (var filter in filters)
+            var potentials = new List<WorldTileType>(currentPotentials);
+            foreach (var potential in potentials)
             {
-                foreach (var incKvp in _inclusiveSamples)
+                bool wantsRemoval = true;
+                foreach (var filter in filters)
                 {
-                    if (!currentPotentials.Contains(incKvp.Key)) continue;
-                    if (!incKvp.Value.Contains(filter)) currentPotentials.Remove(incKvp.Key);
+                    if (_inclusiveSamples[potential].Contains(filter))
+                    {
+                        wantsRemoval = false;
+                        break;
+                    }
                 }
-            }
-        }
 
-        public bool UpdatePotentials(WorldTileType type, ref HashSet<WorldTileType> currentPotentials)
-        {
-            foreach (var sample in samples)
-            {
-                if (sample.selfType == type)
-                {
-                    currentPotentials.IntersectWith(new HashSet<WorldTileType>(sample.possibleTiles));
-                    return true;
-                }
+                if (wantsRemoval) currentPotentials.Remove(potential);
             }
+            Debug.Log($"{potentials.Count} vs {currentPotentials.Count}");
 
-            return false;
         }
         
         public static List<WorldTileType> AllTileTypes => Enum.GetValues(typeof(WorldTileType)).Cast<WorldTileType>().ToList();

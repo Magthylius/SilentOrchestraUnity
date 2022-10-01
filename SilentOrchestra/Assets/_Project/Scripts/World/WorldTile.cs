@@ -36,43 +36,11 @@ namespace SilentOrchestra.World
             Enum.GetValues(typeof(WorldTileType)).Cast<WorldTileType>().ToList().ForEach(enumType => _potentialTypes.Add(enumType));
         }
 
-        public bool ReceivePropagation(WorldTileType tileType)
-        {
-            if (_hasCollapsed) return false;
-            bool result = GameSettings.WorldCollapseData.UpdatePotentials(tileType, ref _potentialTypes);
-            if (_potentialTypes.Count == 1) Collapse();
-            return result;
-        }
-        
-        public void UpdateNeighbourPotentials()
-        {
-            foreach (var neighbour in _neighbours)
-            {
-                neighbour.ReceivePropagation(type);
-            }
-        }
-
-        public void ForceCollapse(WorldTileType forcedType)
-        {
-            print($"neighbours: {_neighbours.Count}");
-            WorldAnchor.Generator.QueuePropagation(_neighbours);
-            Type = forcedType;
-            _hasCollapsed = true;
-        }
-
-        private void Collapse()
-        {
-            WorldAnchor.Generator.QueuePropagation(_neighbours);
-            Type = _potentialTypes.First();
-            _hasCollapsed = true;
-        }
-
         public WorldTileType Type
         {
             get => type;
             set
             {
-                if (type == value) return;
                 type = value;
                 _hexTile.MeshRenderer.material.color = GameSettings.WorldTileColors[type];
             }

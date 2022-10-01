@@ -22,6 +22,6 @@ MonoBehaviour:
   - selfType: 3
     possibleTiles: 0300000000000000
   - selfType: 4
-    possibleTiles: 0400000005000000
+    possibleTiles: 040000000500000000000000
   - selfType: 5
     possibleTiles: 0500000004000000
